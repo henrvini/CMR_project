@@ -9,6 +9,7 @@ routes.get("/", User.index);
 
 // USER ROUTES
 routes.post("/api/users", User.create);
+routes.post("/api/users/login", User.login);
 routes.put("/api/users", User.update);
 routes.get("/api/users", User.index);
 routes.get("/api/users.details/:_id", User.details);

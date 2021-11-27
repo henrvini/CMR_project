@@ -1,4 +1,6 @@
 const User = require("../models/userModel");
+const jwt = require("jsonwebtoken");
+const secret = "mysecret";
 
 module.exports = {
     async index(req, res) {
@@ -37,8 +39,43 @@ module.exports = {
         const { _id, name, email, phone, password } = req.body;
         const data = { name, email, phone, password };
 
-        const user = await User.findOneAndUpdate({ _id }, data, { new: true });
+        const user = await User.findOneAndUpdate({ _id }, data, {
+            new: true,
+        });
 
         res.json(user);
+    },
+
+    async login(req, res) {
+        const { email, password } = req.body;
+        User.findOne(
+            {
+                email: email,
+            },
+            function (err, user) {
+                if (err) {
+                    console.log(err);
+                    res.status(200).json({ error: "Erro no servidor" });
+                } else if (!user) {
+                    res.status(200).json({
+                        status: 2,
+                        error: "E-mail ou senha incorretas",
+                    });
+                } else {
+                    const payload = { email };
+                    const token = jwt.sign(payload, secret, {
+                        expiresIn: "24h",
+                    });
+                    res.cookie("token", token, { httpOnly: true });
+                    res.status(200).json({
+                        status: 1,
+                        auth: true,
+                        token: token,
+                        id_client: user._id,
+                        user: user.name,
+                    });
+                }
+            }
+        );
     },
 };

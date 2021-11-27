@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 
 import User from "../pages/admin/user/index";
 import UserRegister from "../pages/admin/user/userRegister";
@@ -22,7 +22,6 @@ import SellerUpdate from "../pages/admin/seller/sellerUpdate";
 import Calendar from "../pages/admin/calendar/index";
 import CalendarRegister from "../pages/admin/calendar/calendarRegister";
 import CalendarUpdate from "../pages/admin/calendar/calendarUpdate";
-
 
 import Home from "../pages/client/home/Home";
 import Dashboard from "../pages/admin/dashboard/index";
@@ -51,7 +50,7 @@ export default function Routes() {
             />
             <Route
                 exact
-                path="/admin/users/update/:id"
+                path="/admin/users/update/:idUser"
                 component={UserUpdate}
             />
 
@@ -64,7 +63,7 @@ export default function Routes() {
             />
             <Route
                 exact
-                path="/admin/companies/update/:id"
+                path="/admin/companies/update/:idCompany"
                 component={CompanyUpdate}
             />
 
@@ -77,7 +76,7 @@ export default function Routes() {
             />
             <Route
                 exact
-                path="/admin/Seller/update/:id"
+                path="/admin/Seller/update/:idSeller"
                 component={SellerUpdate}
             />
 
@@ -90,7 +89,7 @@ export default function Routes() {
             />
             <Route
                 exact
-                path="/admin/courses/update/:id"
+                path="/admin/courses/update/:idCourse"
                 component={CourseUpdate}
             />
 
@@ -103,11 +102,9 @@ export default function Routes() {
             />
             <Route
                 exact
-                path="/admin/calendar/update/:id"
+                path="/admin/calendar/update/:idCalendar"
                 component={CalendarUpdate}
             />
-
-            {/* <Redirect from="*" to="/" /> */}
         </Switch>
     );
 }

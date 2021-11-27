@@ -1,15 +1,4 @@
-// import React from "react";
-
-// export default function UserRegister() {
-//     return (
-//         <div>
-//             <h1>Cadastro de usuário</h1>
-//         </div>
-//     );
-// }
-
 import React, { useState } from "react";
-import axios from "axios";
 import api from "../../../services/api";
 
 import Main from "../../../components/template/main/Main";
@@ -17,7 +6,7 @@ import Main from "../../../components/template/main/Main";
 const headerProps = {
     icon: "users",
     title: "Usuários",
-    subtitle: "Cadastro de usuários: Incluir, listar, alterar e excluir!",
+    subtitle: "Cadastrar novos usuários no sistema",
 };
 
 export default function UserRegister() {
@@ -34,25 +23,17 @@ export default function UserRegister() {
             password: password,
         };
 
-        try{
-            if (name != "" && email != "" && phone != "" && password != "") {
-                const response = await api.post("/api/users", data)
-            }
-        }catch(err){
-            alert(err)
-        }
-        // if (name != "" && email != "" && phone != "" && password != "") {
-        //     const response = await api.post("/api/users", data);
+        if (name !== "" && email !== "" && phone !== "" && password !== "") {
+            const response = await api.post("/api/users", data);
 
-        //     if (response.status === 200) {
-        //         // window.location.href = "/admin/users";
-        //         alert("SUCESSO!");
-        //     } else {
-        //         alert("ERRO AO CADASTRAR USUÁRIO!");
-        //     }
-        // }else {
-        //     alert("Preencha todos os dados")
-        // }
+            if (response.status === 200) {
+                window.location.href = "/admin/users";
+            } else {
+                alert("Erro ao cadastrar usuário");
+            }
+        } else {
+            alert("Preencha todos os dados");
+        }
     }
 
     return (
@@ -63,6 +44,7 @@ export default function UserRegister() {
                         <div className="form-group">
                             <label>Nome</label>
                             <input
+                                required
                                 type="text"
                                 className="form-control"
                                 name="name"
@@ -77,6 +59,7 @@ export default function UserRegister() {
                         <div className="form-group">
                             <label>E-mail</label>
                             <input
+                                required
                                 type="text"
                                 className="form-control"
                                 name="email"
@@ -91,7 +74,8 @@ export default function UserRegister() {
                         <div className="form-group">
                             <label>Telefone</label>
                             <input
-                                type="number"
+                                required
+                                type="text"
                                 className="form-control"
                                 name="phone"
                                 value={phone}
@@ -105,6 +89,7 @@ export default function UserRegister() {
                         <div className="form-group">
                             <label>Senha</label>
                             <input
+                                required
                                 type="password"
                                 className="form-control"
                                 name="password"
@@ -121,7 +106,7 @@ export default function UserRegister() {
                     <div className="col-12 d-flex justify-content-end">
                         <button
                             className="btn btn-primary"
-                            onClick={handleSubmit()}
+                            onClick={handleSubmit}
                         >
                             Salvar
                         </button>
