@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import api from "./api";
-import { login, logout, getToken } from "./auth";
+import { logout, getToken } from "./auth";
 import { Route, Redirect } from "react-router-dom";
 
 export default function WAuth({ component: Component, ...rest }) {
@@ -14,11 +14,9 @@ export default function WAuth({ component: Component, ...rest }) {
             });
 
             if (res.data.status === 200) {
-                console.log("teste 1");
                 setLoading(false);
                 setRedirect(false);
             } else {
-                console.log("teste 2");
                 logout();
                 setLoading(false);
                 setRedirect(true);
@@ -28,7 +26,7 @@ export default function WAuth({ component: Component, ...rest }) {
     }, []);
 
     return loading ? (
-        "Carregando ..."
+        " Carregando . . ."
     ) : (
         <Route
             {...rest}

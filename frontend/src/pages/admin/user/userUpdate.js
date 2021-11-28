@@ -2,13 +2,15 @@ import React, { useState, useEffect } from "react";
 import api from "../../../services/api";
 import { useParams } from "react-router";
 
-import '../../../components/template/index.css'
+import "../../../components/template/index.css";
+
+import Button from "@mui/material/Button";
+import { IoArrowBackCircleOutline } from "react-icons/io5";
 
 import Main from "../../../components/template/main/Main";
 import Logo from "../../../components/template/logo/Logo";
 import Nav from "../../../components/template/nav/Nav";
 import Footer from "../../../components/template/footer/Footer";
-
 
 const headerProps = {
     icon: "users",
@@ -21,13 +23,13 @@ export default function UserUpdate() {
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("");
-    
+
     const { idUser } = useParams();
-    
+
     useEffect(() => {
         async function getUser() {
             let response = await api.get(`/api/users.details/${idUser}`);
-            
+
             setName(response.data.name);
             setEmail(response.data.email);
             setPhone(response.data.phone);
@@ -36,7 +38,7 @@ export default function UserUpdate() {
         getUser();
         // eslint-disable-next-line
     }, []);
-    
+
     async function handleSubmit() {
         const data = {
             _id: idUser,
@@ -64,6 +66,17 @@ export default function UserUpdate() {
             <Logo />
             <Nav />
             <Main {...headerProps}>
+                <div>
+                    <Button
+                        style={{ marginBottom: 10 }}
+                        variant="contained"
+                        color="primary"
+                        href="/admin/users"
+                    >
+                        <IoArrowBackCircleOutline />
+                        Voltar
+                    </Button>
+                </div>
                 <div className="form">
                     <div className="row">
                         <div className="col-12 col-md-6">
@@ -132,19 +145,13 @@ export default function UserUpdate() {
                     <hr />
                     <div className="row">
                         <div className="col-12 d-flex justify-content-end">
-                            <button
-                                className="btn btn-primary"
+                            <Button
+                                variant="contained"
+                                color="success"
                                 onClick={handleSubmit}
                             >
                                 Salvar
-                            </button>
-
-                            <button
-                                className="btn btn-secondary ml-2"
-                                onClick={""}
-                            >
-                                Cancelar
-                            </button>
+                            </Button>
                         </div>
                     </div>
                 </div>

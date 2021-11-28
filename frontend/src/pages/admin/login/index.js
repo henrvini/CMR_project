@@ -3,14 +3,21 @@ import React, { useState } from "react";
 import api from "../../../services/api";
 import { login, setIdUser, setNameUser } from "../../../services/auth";
 
+import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
+import CssBaseline from "@mui/material/CssBaseline";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import Visibility from "@mui/icons-material/Visibility";
+import InputAdornment from "@mui/material/InputAdornment";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const theme = createTheme();
@@ -18,6 +25,7 @@ const theme = createTheme();
 export default function SignIn() {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
+    const [showPassword, setShowPassword] = useState(false);
 
     async function handleSubmit() {
         await api.post("/api/users/login", { email, password }).then((res) => {
@@ -69,7 +77,7 @@ export default function SignIn() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     />
-                    <TextField
+                    {/* <TextField
                         margin="normal"
                         required
                         fullWidth
@@ -80,7 +88,38 @@ export default function SignIn() {
                         autoComplete="current-password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                    />
+                    /> */}
+                    <FormControl
+                        variant="outlined"
+                        style={{ width: "100%", marginTop: 10 }}
+                    >
+                        <InputLabel htmlFor="field-password">Senha</InputLabel>
+                        <OutlinedInput
+                            id="field-password"
+                            type={showPassword ? "text" : "password"}
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            endAdornment={
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        aria-label="toggle password visibility"
+                                        onClick={(e) =>
+                                            setShowPassword(!showPassword)
+                                        }
+                                        edge="end"
+                                    >
+                                        {showPassword ? (
+                                            <VisibilityOff />
+                                        ) : (
+                                            <Visibility />
+                                        )}
+                                    </IconButton>
+                                </InputAdornment>
+                            }
+                            label="Password"
+                            labelWidth={300}
+                        />
+                    </FormControl>
                     <Button
                         fullWidth
                         variant="contained"

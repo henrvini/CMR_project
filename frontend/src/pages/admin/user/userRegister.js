@@ -4,6 +4,9 @@ import api from "../../../services/api";
 
 import "../../../components/template/index.css";
 
+import Button from "@mui/material/Button";
+import { IoArrowBackCircleOutline } from "react-icons/io5";
+
 import Main from "../../../components/template/main/Main";
 import Logo from "../../../components/template/logo/Logo";
 import Nav from "../../../components/template/nav/Nav";
@@ -47,6 +50,17 @@ export default function UserRegister() {
             <Logo />
             <Nav />
             <Main {...headerProps}>
+                <div>
+                    <Button
+                        style={{ marginBottom: 10 }}
+                        variant="contained"
+                        color="primary"
+                        href="/admin/users"
+                    >
+                        <IoArrowBackCircleOutline />
+                        Voltar
+                    </Button>
+                </div>
                 <div className="form">
                     <div className="row">
                         <div className="col-12 col-md-6">
@@ -115,19 +129,13 @@ export default function UserRegister() {
                     <hr />
                     <div className="row">
                         <div className="col-12 d-flex justify-content-end">
-                            <button
-                                className="btn btn-primary"
+                            <Button
+                                variant="contained"
+                                color="success"
                                 onClick={handleSubmit}
                             >
-                                Salvar
-                            </button>
-
-                            <button
-                                className="btn btn-secondary ml-2"
-                                onClick={""}
-                            >
-                                Cancelar
-                            </button>
+                                Cadastrar
+                            </Button>
                         </div>
                     </div>
                 </div>

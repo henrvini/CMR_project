@@ -2,20 +2,26 @@ import React, { useState, useEffect } from "react";
 
 import api from "../../../services/api";
 
-import '../../../components/template/index.css'
+import "../../../components/template/index.css";
 
+import Nav from "../../../components/template/nav/Nav";
 import Main from "../../../components/template/main/Main";
 import Logo from "../../../components/template/logo/Logo";
-import Nav from "../../../components/template/nav/Nav";
 import Footer from "../../../components/template/footer/Footer";
 
+import Button from "@mui/material/Button";
 import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import { RiPencilLine } from "react-icons/ri";
+import { HiOutlineTrash } from "react-icons/hi";
+import { AiOutlineUserAdd } from "react-icons/ai";
+import TableRow from "@material-ui/core/TableRow";
+import { confirmAlert } from "react-confirm-alert";
+import TableCell from "@material-ui/core/TableCell";
+import TableBody from "@material-ui/core/TableBody";
+import TableHead from "@material-ui/core/TableHead";
+import "react-confirm-alert/src/react-confirm-alert.css";
+import TableContainer from "@material-ui/core/TableContainer";
 
 const headerProps = {
     icon: "users",
@@ -36,17 +42,30 @@ export default function UserDetails() {
     }, []);
 
     async function handleDelete(id) {
-        if (window.confirm("Deseja realmente excluir este usuário?")) {
-            let result = await api.delete(`/api/users/${id}`);
-            if (result.status === 200) {
-                window.location.href = "/admin/users";
-            } else {
-                alert("Não foi possível deletar o usuário");
-            }
-        }
+        confirmAlert({
+            title: "Atenção",
+            message: "Deseja realmente deletar este usuário?",
+            buttons: [
+                {
+                    label: "Sim",
+                    onClick: async () => {
+                        let result = await api.delete(`/api/users/${id}`);
+                        if (result.status === 200) {
+                            window.location.href = "/admin/users";
+                        } else {
+                            alert("Não foi possível deletar o usuário");
+                        }
+                    },
+                },
+                {
+                    label: "Não",
+                    onClick: () => {},
+                },
+            ],
+        });
     }
 
-    function redirect(id) {
+    function redirectUpdate(id) {
         window.location.href = `/admin/users/update/${id}`;
     }
 
@@ -55,17 +74,28 @@ export default function UserDetails() {
             <Logo />
             <Nav />
             <Main {...headerProps}>
+                <div onClick={""}>
+                    <Button
+                        style={{ marginBottom: 10 }}
+                        variant="contained"
+                        color="primary"
+                        href="/admin/users/register"
+                    >
+                        <AiOutlineUserAdd />
+                        Cadastrar
+                    </Button>
+                </div>
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 650 }} aria-label="simple table">
                         <TableHead>
                             <TableRow>
-                                <TableCell>Nome</TableCell>
-                                <TableCell align="center">E-mail</TableCell>
-                                <TableCell align="center">Telefone</TableCell>
-                                <TableCell align="center">
+                                <TableCell align="left">Nome</TableCell>
+                                <TableCell align="left">E-mail</TableCell>
+                                <TableCell align="left">Telefone</TableCell>
+                                <TableCell align="left">
                                     Data de cadastro
                                 </TableCell>
-                                <TableCell align="right">Opções</TableCell>
+                                <TableCell align="center">Opções</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -78,37 +108,47 @@ export default function UserDetails() {
                                         },
                                     }}
                                 >
-                                    <TableCell component="th" scope="row">
+                                    <TableCell
+                                        align="left"
+                                        component="th"
+                                        scope="row"
+                                    >
                                         {row.name}
                                     </TableCell>
-                                    <TableCell align="center">
+                                    <TableCell align="left">
                                         {row.email}
                                     </TableCell>
-                                    <TableCell align="center">
+                                    <TableCell align="left">
                                         {row.phone}
                                     </TableCell>
-                                    <TableCell align="center">
+                                    <TableCell align="left">
                                         {new Date(row.createdAt).toLocaleString(
                                             "pt-br"
                                         )}
                                     </TableCell>
-                                    <TableCell align="right">
-                                        <button
-                                            className="btn btn-warning"
-                                            onClick={() => redirect(row._id)}
+
+                                    <TableCell align="center">
+                                        <Button
+                                            onClick={() =>
+                                                redirectUpdate(row._id)
+                                            }
+                                            variant="contained"
+                                            color="warning"
                                         >
                                             Editar
-                                            <i className="fa fa-pencil"></i>
-                                        </button>
-                                        <button
-                                            className="btn btn-danger ml-2"
+                                            <RiPencilLine />
+                                        </Button>
+                                        &nbsp; {/*Adiciona um backspace*/}
+                                        <Button
                                             onClick={() =>
                                                 handleDelete(row._id)
                                             }
+                                            variant="contained"
+                                            color="error"
                                         >
-                                            Excluir
-                                            <i className="fa fa-trash"></i>
-                                        </button>
+                                            Deletar
+                                            <HiOutlineTrash />
+                                        </Button>
                                     </TableCell>
                                 </TableRow>
                             ))}
