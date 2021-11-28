@@ -59,23 +59,76 @@ module.exports = {
                 } else if (!user) {
                     res.status(200).json({
                         status: 2,
-                        error: "E-mail ou senha incorretas",
+                        error: "E-mail incorreto",
                     });
                 } else {
-                    const payload = { email };
-                    const token = jwt.sign(payload, secret, {
-                        expiresIn: "24h",
-                    });
-                    res.cookie("token", token, { httpOnly: true });
-                    res.status(200).json({
-                        status: 1,
-                        auth: true,
-                        token: token,
-                        id_client: user._id,
-                        user: user.name,
-                    });
+                    user.isCorrectPassword(
+                        password,
+                        async function (err, same) {
+                            if (err) {
+                                res.status(200).json({
+                                    error: "Erro no servidor",
+                                });
+                            } else if (!same) {
+                                res.status(200).json({
+                                    status: 2,
+                                    error: "Senha incorreta",
+                                });
+                            } else {
+                                const payload = { email };
+                                const token = jwt.sign(payload, secret, {
+                                    expiresIn: "24h",
+                                });
+                                res.cookie("token", token, { httpOnly: true });
+                                res.status(200).json({
+                                    status: 1,
+                                    auth: true,
+                                    token: token,
+                                    id_client: user._id,
+                                    user: user.name,
+                                });
+                            }
+                        }
+                    );
                 }
             }
         );
+    },
+
+    async checkToken(req, res) {
+        const token =
+            req.body.token ||
+            req.query.token ||
+            req.cookies.token ||
+            req.headers["x-access-token"];
+
+        if (!token) {
+            res.json({
+                status: 401,
+                msg: "Não autorizado: Token inexistente",
+            });
+        } else {
+            jwt.verify(token, secret, function (err, decoded) {
+                if (err) {
+                    res.json({
+                        status: 401,
+                        msg: "Não autorizado: Token inválido",
+                    });
+                } else {
+                    res.json({ status: 200 });
+                }
+            });
+        }
+    },
+
+    async destroyToken(req, res) {
+        const token = req.headers.token;
+
+        if (token) {
+            res.cookie("token", null, { httpOnly: true });
+        } else {
+            res.status(401).send("Logout não autorizado");
+        }
+        res.send("Sessão finalizada com sucesso");
     },
 };

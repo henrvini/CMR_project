@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from "react";
 
+import api from "../../../services/api";
+
+import '../../../components/template/index.css'
+
+import Main from "../../../components/template/main/Main";
+import Logo from "../../../components/template/logo/Logo";
+import Nav from "../../../components/template/nav/Nav";
+import Footer from "../../../components/template/footer/Footer";
+
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -7,9 +16,6 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-
-import Main from "../../../components/template/main/Main";
-import api from "../../../services/api";
 
 const headerProps = {
     icon: "users",
@@ -45,65 +51,72 @@ export default function UserDetails() {
     }
 
     return (
-        <Main {...headerProps}>
-            <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Nome</TableCell>
-                            <TableCell align="center">E-mail</TableCell>
-                            <TableCell align="center">Telefone</TableCell>
-                            <TableCell align="center">
-                                Data de cadastro
-                            </TableCell>
-                            <TableCell align="right">Opções</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {users.map((row) => (
-                            <TableRow
-                                key={row._id}
-                                sx={{
-                                    "&:last-child td, &:last-child th": {
-                                        border: 0,
-                                    },
-                                }}
-                            >
-                                <TableCell component="th" scope="row">
-                                    {row.name}
-                                </TableCell>
+        <grid className="app">
+            <Logo />
+            <Nav />
+            <Main {...headerProps}>
+                <TableContainer component={Paper}>
+                    <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Nome</TableCell>
+                                <TableCell align="center">E-mail</TableCell>
+                                <TableCell align="center">Telefone</TableCell>
                                 <TableCell align="center">
-                                    {row.email}
+                                    Data de cadastro
                                 </TableCell>
-                                <TableCell align="center">
-                                    {row.phone}
-                                </TableCell>
-                                <TableCell align="center">
-                                    {new Date(row.createdAt).toLocaleString(
-                                        "pt-br"
-                                    )}
-                                </TableCell>
-                                <TableCell align="right">
-                                    <button
-                                        className="btn btn-warning"
-                                        onClick={() => redirect(row._id)}
-                                    >
-                                        Editar
-                                        <i className="fa fa-pencil"></i>
-                                    </button>
-                                    <button
-                                        className="btn btn-danger ml-2"
-                                        onClick={() => handleDelete(row._id)}
-                                    >
-                                        Excluir
-                                        <i className="fa fa-trash"></i>
-                                    </button>
-                                </TableCell>
+                                <TableCell align="right">Opções</TableCell>
                             </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-        </Main>
+                        </TableHead>
+                        <TableBody>
+                            {users.map((row) => (
+                                <TableRow
+                                    key={row._id}
+                                    sx={{
+                                        "&:last-child td, &:last-child th": {
+                                            border: 0,
+                                        },
+                                    }}
+                                >
+                                    <TableCell component="th" scope="row">
+                                        {row.name}
+                                    </TableCell>
+                                    <TableCell align="center">
+                                        {row.email}
+                                    </TableCell>
+                                    <TableCell align="center">
+                                        {row.phone}
+                                    </TableCell>
+                                    <TableCell align="center">
+                                        {new Date(row.createdAt).toLocaleString(
+                                            "pt-br"
+                                        )}
+                                    </TableCell>
+                                    <TableCell align="right">
+                                        <button
+                                            className="btn btn-warning"
+                                            onClick={() => redirect(row._id)}
+                                        >
+                                            Editar
+                                            <i className="fa fa-pencil"></i>
+                                        </button>
+                                        <button
+                                            className="btn btn-danger ml-2"
+                                            onClick={() =>
+                                                handleDelete(row._id)
+                                            }
+                                        >
+                                            Excluir
+                                            <i className="fa fa-trash"></i>
+                                        </button>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </Main>
+            <Footer />
+        </grid>
     );
 }

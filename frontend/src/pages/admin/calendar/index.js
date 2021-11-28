@@ -1,6 +1,13 @@
 import React, { Component } from "react";
 import axios from "axios";
+
+import '../../../components/template/index.css'
+
 import Main from "../../../components/template/main/Main";
+import Logo from "../../../components/template/logo/Logo";
+import Nav from "../../../components/template/nav/Nav";
+import Footer from "../../../components/template/footer/Footer";
+
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 
@@ -176,11 +183,16 @@ export default class Calendar extends Component {
 
     render() {
         return (
-            <Main {...headerProps}>
-                {this.renderForm()}
-                {this.renderTable()}
-                {this.renderCalendar()}
-            </Main>
+            <grid className="app">
+                <Logo />
+                <Nav />
+                <Main {...headerProps}>
+                    {this.renderForm()}
+                    {this.renderTable()}
+                    {this.renderCalendar()}
+                </Main>
+                <Footer />
+            </grid>
         );
     }
 }

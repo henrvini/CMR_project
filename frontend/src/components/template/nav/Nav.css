@@ -15,3 +15,17 @@ aside.menu-area {
 .menu a:hover {
     background: linear-gradient(135deg, #3945e0 0%, #151fb6 100%);
 }
+
+Button.button {
+    background-color: rgba(223, 15, 15, 0.89);
+    display: flex;
+    white-space: nowrap;
+    box-shadow: var(--shadow);
+    justify-content: center;
+}
+
+div.exit {
+    padding: 15px;
+    display: flex;
+    justify-content: flex-start;
+}

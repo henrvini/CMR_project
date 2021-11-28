@@ -23,8 +23,11 @@ import Calendar from "../pages/admin/calendar/index";
 import CalendarRegister from "../pages/admin/calendar/calendarRegister";
 import CalendarUpdate from "../pages/admin/calendar/calendarUpdate";
 
-import Home from "../pages/client/home/Home";
+import Home from "../pages/client/home/home";
 import Dashboard from "../pages/admin/dashboard/index";
+import Login from "../pages/admin/login/index";
+
+import PrivateRoute from "../services/wAuth";
 
 export default function Routes() {
     return (
@@ -39,16 +42,17 @@ export default function Routes() {
             <Route exact path="/" component={Home} />
 
             {/* ADMIN ROUTE */}
-            <Route exact path="/admin" component={Dashboard} />
+            <Route exact path="/admin/login" component={Login} />
+            <PrivateRoute exact path="/admin" component={Dashboard} />
 
             {/* USER ROUTE */}
-            <Route exact path="/admin/users" component={User} />
-            <Route
+            <PrivateRoute exact path="/admin/users" component={User} />
+            <PrivateRoute
                 exact
                 path="/admin/users/register"
                 component={UserRegister}
             />
-            <Route
+            <PrivateRoute
                 exact
                 path="/admin/users/update/:idUser"
                 component={UserUpdate}

@@ -1,8 +1,29 @@
 import "./Nav.css";
 import React from "react";
 import { Link } from "react-router-dom";
+import { ImExit } from "react-icons/im";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+
+import api from "../../../services/api";
+import { getToken, logout } from "../../../services/auth";
 
 export default (props) => {
+    async function confirmExit() {
+        if (window.confirm("Deseja realmente sair?")) {
+            const response = await api.get("/api/users/destroytoken", {
+                headers: { token: getToken() },
+            });
+
+            if (response.status === 200) {
+                logout();
+                window.location.href = "/admin/login";
+            } else {
+                alert("Não foi possível encerrar sessão");
+            }
+        }
+    }
+
     return (
         <aside className="menu-area">
             <nav className="menu">
@@ -25,7 +46,18 @@ export default (props) => {
                 <Link to="/admin/calendar">
                     <i className="fa fa-calendar"></i> Calendário
                 </Link>
+
+                <div className="exit" onClick={confirmExit}>
+                    <Button
+                        className="button"
+                        variant="contained"
+                        color="error"
+                    >
+                        <ImExit />
+                        Sair
+                    </Button>
+                </div>
             </nav>
-        </aside> 
+        </aside>
     );
 };
