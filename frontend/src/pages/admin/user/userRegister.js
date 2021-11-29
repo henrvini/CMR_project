@@ -4,7 +4,10 @@ import api from "../../../services/api";
 
 import "../../../components/template/index.css";
 
+import Grid from "@mui/material/Grid";
+import { FiUsers } from "react-icons/fi";
 import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 
 import Main from "../../../components/template/main/Main";
@@ -13,7 +16,7 @@ import Nav from "../../../components/template/nav/Nav";
 import Footer from "../../../components/template/footer/Footer";
 
 const headerProps = {
-    icon: "users",
+    icon: <FiUsers />,
     title: "Usuários",
     subtitle: "Cadastrar novos usuários no sistema",
 };
@@ -61,82 +64,67 @@ export default function UserRegister() {
                         Voltar
                     </Button>
                 </div>
-                <div className="form">
-                    <div className="row">
-                        <div className="col-12 col-md-6">
-                            <div className="form-group">
-                                <label>Nome</label>
-                                <input
-                                    required
-                                    type="text"
-                                    className="form-control"
-                                    name="name"
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)}
-                                    placeholder="Digite o nome completo"
-                                />
-                            </div>
-                        </div>
-
-                        <div className="col-12 col-md-6">
-                            <div className="form-group">
-                                <label>E-mail</label>
-                                <input
-                                    required
-                                    type="text"
-                                    className="form-control"
-                                    name="email"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    placeholder="Digite o e-mail"
-                                />
-                            </div>
-                        </div>
-
-                        <div className="col-12 col-md-6">
-                            <div className="form-group">
-                                <label>Telefone</label>
-                                <input
-                                    required
-                                    type="text"
-                                    className="form-control"
-                                    name="phone"
-                                    value={phone}
-                                    onChange={(e) => setPhone(e.target.value)}
-                                    placeholder="Digite o telefone"
-                                />
-                            </div>
-                        </div>
-
-                        <div className="col-12 col-md-6">
-                            <div className="form-group">
-                                <label>Senha</label>
-                                <input
-                                    required
-                                    type="password"
-                                    className="form-control"
-                                    name="password"
-                                    value={password}
-                                    onChange={(e) =>
-                                        setPassword(e.target.value)
-                                    }
-                                    placeholder="Digite a senha"
-                                />
-                            </div>
-                        </div>
-                    </div>
-
-                    <hr />
-                    <div className="row">
-                        <div className="col-12 d-flex justify-content-end">
-                            <Button
-                                variant="contained"
-                                color="success"
-                                onClick={handleSubmit}
-                            >
-                                Cadastrar
-                            </Button>
-                        </div>
+                <Grid container spacing={3}>
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            required
+                            id="name"
+                            name="name"
+                            label="Nome"
+                            fullWidth
+                            variant="standard"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            required
+                            id="email"
+                            name="email"
+                            label="Email"
+                            fullWidth
+                            variant="standard"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            required
+                            id="phone"
+                            name="phone"
+                            label="Telefone"
+                            fullWidth
+                            variant="standard"
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <TextField
+                            required
+                            type="password"
+                            id="password"
+                            name="password"
+                            label="Senha"
+                            fullWidth
+                            variant="standard"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </Grid>
+                </Grid>
+                <hr />
+                <div className="row">
+                    <div className="col-12 d-flex justify-content-end">
+                        <Button
+                            variant="contained"
+                            color="success"
+                            onClick={handleSubmit}
+                        >
+                            Cadastrar
+                        </Button>
                     </div>
                 </div>
             </Main>

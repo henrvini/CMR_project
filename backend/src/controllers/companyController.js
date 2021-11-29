@@ -6,8 +6,12 @@ module.exports = {
         res.json(company);
     },
 
+    // COMPANY_NAME -> RAZÃO SOCIAL
+    // TRADE -> NOME/MARCA FANTASIA
+
     async create(req, res) {
-        const { company_name, trade, cgccpf, email, phone, state, city } = req.body;
+        const { company_name, trade, cgccpf, email, phone, state, city } =
+            req.body;
 
         let data = {};
         let company = await Company.findOne({ cgccpf });

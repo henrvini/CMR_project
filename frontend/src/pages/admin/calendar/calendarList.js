@@ -9,50 +9,51 @@ import Main from "../../../components/template/main/Main";
 import Logo from "../../../components/template/logo/Logo";
 import Footer from "../../../components/template/footer/Footer";
 
-import { FiUsers } from "react-icons/fi";
 import Button from "@mui/material/Button";
+import { BiCalendar } from "react-icons/bi";
 import Table from "@material-ui/core/Table";
 import Paper from "@material-ui/core/Paper";
 import { RiPencilLine } from "react-icons/ri";
 import { HiOutlineTrash } from "react-icons/hi";
-import { AiOutlineUserAdd } from "react-icons/ai";
+import { BiCalendarPlus } from "react-icons/bi";
 import TableRow from "@material-ui/core/TableRow";
 import { confirmAlert } from "react-confirm-alert";
 import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 import TableHead from "@material-ui/core/TableHead";
 import "react-confirm-alert/src/react-confirm-alert.css";
+import { IoArrowBackCircleOutline } from "react-icons/io5";
 import TableContainer from "@material-ui/core/TableContainer";
 
 const headerProps = {
-    icon: <FiUsers />,
+    icon: <BiCalendar size={20} />,
     title: "Usuários",
     subtitle: "Detalhes e informações de usuários cadastrados no sistema",
 };
 
-export default function UserDetails() {
-    const [users, setUsers] = useState([]);
+export default function CalendarList() {
+    const [calendars, setCalendars] = useState([]);
 
     useEffect(() => {
-        async function loadUsers() {
-            const response = await api.get("/api/users");
+        async function loadCalendars() {
+            const response = await api.get("/api/calendars");
 
-            setUsers(response.data);
+            setCalendars(response.data);
         }
-        loadUsers();
+        loadCalendars();
     }, []);
 
     async function handleDelete(id) {
         confirmAlert({
             title: "Atenção",
-            message: "Deseja realmente deletar este usuário?",
+            message: "Deseja realmente deletar este evento?",
             buttons: [
                 {
                     label: "Sim",
                     onClick: async () => {
-                        let result = await api.delete(`/api/users/${id}`);
+                        let result = await api.delete(`/api/calendars/${id}`);
                         if (result.status === 200) {
-                            window.location.href = "/admin/users";
+                            window.location.href = "/admin/calendars/list";
                         } else {
                             alert("Não foi possível deletar o usuário");
                         }
@@ -67,7 +68,7 @@ export default function UserDetails() {
     }
 
     function redirectUpdate(id) {
-        window.location.href = `/admin/users/update/${id}`;
+        window.location.href = `/admin/calendars/update/${id}`;
     }
 
     return (
@@ -80,10 +81,20 @@ export default function UserDetails() {
                         style={{ marginBottom: 10 }}
                         variant="contained"
                         color="primary"
-                        href="/admin/users/register"
+                        href="/admin/calendars"
                     >
-                        <AiOutlineUserAdd />
-                        Cadastrar
+                        <IoArrowBackCircleOutline size={20} />
+                        Voltar
+                    </Button>
+                    &nbsp;
+                    <Button
+                        style={{ marginBottom: 10 }}
+                        variant="contained"
+                        color="primary"
+                        href="/admin/calendars/register"
+                    >
+                        <BiCalendarPlus size={20} />
+                        Adicionar evento
                     </Button>
                 </div>
                 <TableContainer component={Paper}>
@@ -91,16 +102,14 @@ export default function UserDetails() {
                         <TableHead>
                             <TableRow>
                                 <TableCell align="left">Nome</TableCell>
-                                <TableCell align="left">E-mail</TableCell>
-                                <TableCell align="left">Telefone</TableCell>
-                                <TableCell align="left">
-                                    Data de cadastro
-                                </TableCell>
+                                <TableCell align="left">Descrição</TableCell>
+                                <TableCell align="left">Local</TableCell>
+                                <TableCell align="left">Data</TableCell>
                                 <TableCell align="center">Opções</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {users.map((row) => (
+                            {calendars.map((row) => (
                                 <TableRow
                                     key={row._id}
                                     sx={{
@@ -114,16 +123,16 @@ export default function UserDetails() {
                                         component="th"
                                         scope="row"
                                     >
-                                        {row.name}
+                                        {row.event_name}
                                     </TableCell>
                                     <TableCell align="left">
-                                        {row.email}
+                                        {row.desc_event}
                                     </TableCell>
                                     <TableCell align="left">
-                                        {row.phone}
+                                        {row.location}
                                     </TableCell>
                                     <TableCell align="left">
-                                        {new Date(row.createdAt).toLocaleString(
+                                        {new Date(row.date).toLocaleString(
                                             "pt-br"
                                         )}
                                     </TableCell>
@@ -137,7 +146,7 @@ export default function UserDetails() {
                                             color="warning"
                                         >
                                             Editar
-                                            <RiPencilLine />
+                                            <RiPencilLine size={20} />
                                         </Button>
                                         &nbsp; {/*Adiciona um backspace*/}
                                         <Button
@@ -148,7 +157,7 @@ export default function UserDetails() {
                                             color="error"
                                         >
                                             Deletar
-                                            <HiOutlineTrash />
+                                            <HiOutlineTrash size={20} />
                                         </Button>
                                     </TableCell>
                                 </TableRow>

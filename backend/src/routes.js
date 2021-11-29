@@ -4,6 +4,7 @@ const routes = express.Router();
 
 const User = require("./controllers/userController");
 const Company = require("./controllers/companyController");
+const Calendar = require("./controllers/calendarController")
 
 routes.get("/", User.index);
 
@@ -29,5 +30,15 @@ routes.get("/api/companies", Company.index);
 routes.get("/api/companies.details/:_id", Company.details);
 
 routes.delete("/api/companies/:_id", Company.delete);
+
+// CALENDAR ROUTES
+routes.post("/api/calendars", Calendar.create);
+
+routes.put("/api/calendars", Calendar.update);
+
+routes.get("/api/calendars", Calendar.index);
+routes.get("/api/calendar.details/:_id", Calendar.details);
+
+routes.delete("/api/calendars/:_id", Calendar.delete);
 
 module.exports = routes;

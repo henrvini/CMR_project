@@ -4,12 +4,10 @@ import { Switch, Route } from "react-router-dom";
 import User from "../pages/admin/user/index";
 import UserRegister from "../pages/admin/user/userRegister";
 import UserUpdate from "../pages/admin/user/userUpdate";
-// import UserDetails from "../components/crud/user/User";
 
 import Company from "../pages/admin/company/index";
 import CompanyRegister from "../pages/admin/company/companyRegister";
 import CompanyUpdate from "../pages/admin/company/companyUpdate";
-// import Company from "../components/crud/company/Company";
 
 import Course from "../pages/admin/courses/index";
 import CourseRegister from "../pages/admin/courses/coursesRegister";
@@ -22,8 +20,9 @@ import SellerUpdate from "../pages/admin/seller/sellerUpdate";
 import Calendar from "../pages/admin/calendar/index";
 import CalendarRegister from "../pages/admin/calendar/calendarRegister";
 import CalendarUpdate from "../pages/admin/calendar/calendarUpdate";
+import CalendarList from "../pages/admin/calendar/calendarList";
 
-import Home from "../pages/client/home/home";
+import Home from "../pages/admin/home/home";
 import Dashboard from "../pages/admin/dashboard/index";
 import Login from "../pages/admin/login/index";
 
@@ -32,12 +31,6 @@ import PrivateRoute from "../services/wAuth";
 export default function Routes() {
     return (
         <Switch>
-            {/* <Route exact path="/" component={Home} />
-            <Route path="/users" component={User} />
-            <Route path="/company" component={Company} />
-            <Route path="/calendar" component={Calendar} />
-            <Redirect from="*" to="/" /> */}
-
             {/* CLIENT ROUTE */}
             <Route exact path="/" component={Home} />
 
@@ -98,15 +91,20 @@ export default function Routes() {
             />
 
             {/* CALENDAR ROUTE */}
-            <Route exact path="/admin/calendar" component={Calendar} />
-            <Route
+            <PrivateRoute exact path="/admin/calendars" component={Calendar} />
+            <PrivateRoute
                 exact
-                path="/admin/calendar/register"
+                path="/admin/calendars/list"
+                component={CalendarList}
+            />
+            <PrivateRoute
+                exact
+                path="/admin/calendars/register"
                 component={CalendarRegister}
             />
-            <Route
+            <PrivateRoute
                 exact
-                path="/admin/calendar/update/:idCalendar"
+                path="/admin/calendars/update/:idCalendar"
                 component={CalendarUpdate}
             />
         </Switch>

@@ -54,23 +54,23 @@ export default (props) => {
             <nav className="menu">
                 {/* REFATORAR navItem.js */}
                 <Link to="/">
-                    <AiOutlineHome /> Início
+                    <AiOutlineHome size={20}/> Início
                 </Link>
                 <Link to="/admin/users">
-                    <FiUsers /> Usuários
+                    <FiUsers size={20}/> Usuários
                 </Link>
                 <Link to="/admin/companies">
-                    <BiBuildings /> Empresas
+                    <BiBuildings size={20}/> Empresas
                 </Link>
                 <Link to="/admin/sellers">
-                    <MdOutlineSell />
+                    <MdOutlineSell size={20}/>
                     Vendedores
                 </Link>
                 <Link to="/admin/courses">
-                    <IoSchoolOutline /> Cursos
+                    <IoSchoolOutline size={20}/> Cursos
                 </Link>
-                <Link to="/admin/calendar">
-                    <BiCalendar /> Calendário
+                <Link to="/admin/calendars">
+                    <BiCalendar size={20}/> Calendário
                 </Link>
 
                 <div className="exit">
@@ -80,7 +80,7 @@ export default (props) => {
                         variant="contained"
                         color="error"
                     >
-                        <ImExit />
+                        <ImExit size={20}/>
                         Sair
                     </Button>
                 </div>
