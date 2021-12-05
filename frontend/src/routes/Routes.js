@@ -9,13 +9,13 @@ import Company from "../pages/admin/company/index";
 import CompanyRegister from "../pages/admin/company/companyRegister";
 import CompanyUpdate from "../pages/admin/company/companyUpdate";
 
-import Course from "../pages/admin/courses/index";
-import CourseRegister from "../pages/admin/courses/coursesRegister";
-import CourseUpdate from "../pages/admin/courses/coursesUpdate";
-
 import Seller from "../pages/admin/seller/index";
 import SellerRegister from "../pages/admin/seller/sellerRegister";
 import SellerUpdate from "../pages/admin/seller/sellerUpdate";
+
+import Course from "../pages/admin/course/index";
+import CourseRegister from "../pages/admin/course/courseRegister";
+import CourseUpdate from "../pages/admin/course/courseUpdate";
 
 import Calendar from "../pages/admin/calendar/index";
 import CalendarRegister from "../pages/admin/calendar/calendarRegister";

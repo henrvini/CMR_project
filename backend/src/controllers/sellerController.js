@@ -6,9 +6,6 @@ module.exports = {
         res.json(seller);
     },
 
-    // COMPANY_NAME -> RAZÃO SOCIAL
-    // TRADE -> NOME/MARCA FANTASIA
-
     async create(req, res) {
         const { name, email, phone, cgccpf, companyId } = req.body;
 

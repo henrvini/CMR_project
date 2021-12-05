@@ -6,6 +6,7 @@ const User = require("./controllers/userController");
 const Company = require("./controllers/companyController");
 const Calendar = require("./controllers/calendarController");
 const Seller = require("./controllers/sellerController");
+const Course = require("./controllers/courseController");
 
 routes.get("/", User.index);
 
@@ -52,5 +53,16 @@ routes.get("/api/sellers", Seller.index);
 routes.get("/api/sellers.details/:_id", Seller.details);
 
 routes.delete("/api/sellers/:_id", Seller.delete);
+
+// COURSES ROUTES
+
+routes.post("/api/courses", Course.create);
+
+routes.put("/api/courses", Course.update);
+
+routes.get("/api/courses", Course.index);
+routes.get("/api/courses.details/:_id", Course.details);
+
+routes.delete("/api/courses/:_id", Course.delete);
 
 module.exports = routes;
