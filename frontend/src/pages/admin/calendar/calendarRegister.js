@@ -61,7 +61,7 @@ export default function CalendarRegister() {
                         color="primary"
                         href="/admin/calendars"
                     >
-                        <IoArrowBackCircleOutline />
+                        <IoArrowBackCircleOutline size={20}/>
                         Voltar
                     </Button>
                     &nbsp;

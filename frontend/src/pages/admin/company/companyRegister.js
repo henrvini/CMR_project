@@ -16,7 +16,7 @@ import Nav from "../../../components/template/nav/Nav";
 import Footer from "../../../components/template/footer/Footer";
 
 const headerProps = {
-    icon: <BiBuildings />,
+    icon: <BiBuildings size={20} />,
     title: "Empresas",
     subtitle: "Cadastrar novas empresas no sistema",
 };
@@ -74,7 +74,7 @@ export default function CompanyRegister() {
                         color="primary"
                         href="/admin/companies"
                     >
-                        <IoArrowBackCircleOutline />
+                        <IoArrowBackCircleOutline size={20} />
                         Voltar
                     </Button>
                 </div>

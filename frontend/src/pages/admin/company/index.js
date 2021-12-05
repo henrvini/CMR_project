@@ -25,7 +25,7 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 import TableContainer from "@material-ui/core/TableContainer";
 
 const headerProps = {
-    icon: <BiBuildings />,
+    icon: <BiBuildings size={20} />,
     title: "Empresas",
     subtitle: "Detalhes e informações de empresas cadastradas no sistema",
 };
@@ -82,7 +82,7 @@ export default function CompanyDetails() {
                         color="primary"
                         href="/admin/companies/register"
                     >
-                        <AiOutlineUserAdd />
+                        <AiOutlineUserAdd size={20} />
                         Cadastrar
                     </Button>
                 </div>
@@ -133,7 +133,7 @@ export default function CompanyDetails() {
                                             color="warning"
                                         >
                                             Editar
-                                            <RiPencilLine />
+                                            <RiPencilLine size={20} />
                                         </Button>
                                         &nbsp; {/*Adiciona um backspace*/}
                                         <Button
@@ -144,7 +144,7 @@ export default function CompanyDetails() {
                                             color="error"
                                         >
                                             Deletar
-                                            <HiOutlineTrash />
+                                            <HiOutlineTrash size={20} />
                                         </Button>
                                     </TableCell>
                                 </TableRow>

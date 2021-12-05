@@ -12,9 +12,9 @@ import Footer from "../../../components/template/footer/Footer";
 import { getNameUser } from "../../../services/auth";
 
 const headerProps = {
-    icon: <AiOutlineHome />,
-    title: "Usuários",
-    subtitle: "Atualização de usuários do sistema",
+    icon: <AiOutlineHome size={20} />,
+    title: "Home",
+    subtitle: "Página inicial",
 };
 
 export default (props) => {

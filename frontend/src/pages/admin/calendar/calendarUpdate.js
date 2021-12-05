@@ -78,7 +78,7 @@ export default function CalendarUpdate() {
                         color="primary"
                         href="/admin/calendars/list"
                     >
-                        <IoArrowBackCircleOutline />
+                        <IoArrowBackCircleOutline size={20} />
                         Voltar
                     </Button>
                 </div>

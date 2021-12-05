@@ -60,7 +60,7 @@ export default function SignIn() {
                     }}
                 >
                     <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-                        <LockOutlinedIcon />
+                        <LockOutlinedIcon size={20} />
                     </Avatar>
                     <Typography component="h1" variant="h5">
                         Login
@@ -77,18 +77,6 @@ export default function SignIn() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     />
-                    {/* <TextField
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="password"
-                        label="Senha"
-                        type="password"
-                        id="password"
-                        autoComplete="current-password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    /> */}
                     <FormControl
                         variant="outlined"
                         style={{ width: "100%", marginTop: 10 }}

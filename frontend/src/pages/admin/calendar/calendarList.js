@@ -101,7 +101,7 @@ export default function CalendarList() {
                     <Table sx={{ minWidth: 650 }} aria-label="simple table">
                         <TableHead>
                             <TableRow>
-                                <TableCell align="left">Nome</TableCell>
+                                <TableCell align="left">Título</TableCell>
                                 <TableCell align="left">Descrição</TableCell>
                                 <TableCell align="left">Local</TableCell>
                                 <TableCell align="left">Data</TableCell>
@@ -132,7 +132,7 @@ export default function CalendarList() {
                                         {row.location}
                                     </TableCell>
                                     <TableCell align="left">
-                                        {new Date(row.date).toLocaleString(
+                                        {new Date(row.date).toLocaleDateString(
                                             "pt-br"
                                         )}
                                     </TableCell>

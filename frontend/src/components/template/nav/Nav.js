@@ -75,12 +75,13 @@ export default (props) => {
 
                 <div className="exit">
                     <Button
-                        onClick={confirmExit}
                         className="button"
                         variant="contained"
                         color="error"
+                        onClick={confirmExit}
                     >
                         <ImExit size={20}/>
+                        &nbsp;
                         Sair
                     </Button>
                 </div>

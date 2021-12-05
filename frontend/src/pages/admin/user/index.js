@@ -25,7 +25,7 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 import TableContainer from "@material-ui/core/TableContainer";
 
 const headerProps = {
-    icon: <FiUsers />,
+    icon: <FiUsers size={20} />,
     title: "Usuários",
     subtitle: "Detalhes e informações de usuários cadastrados no sistema",
 };
@@ -82,7 +82,7 @@ export default function UserDetails() {
                         color="primary"
                         href="/admin/users/register"
                     >
-                        <AiOutlineUserAdd />
+                        <AiOutlineUserAdd size={20} />
                         Cadastrar
                     </Button>
                 </div>
@@ -137,7 +137,7 @@ export default function UserDetails() {
                                             color="warning"
                                         >
                                             Editar
-                                            <RiPencilLine />
+                                            <RiPencilLine size={20} />
                                         </Button>
                                         &nbsp; {/*Adiciona um backspace*/}
                                         <Button
@@ -148,7 +148,7 @@ export default function UserDetails() {
                                             color="error"
                                         >
                                             Deletar
-                                            <HiOutlineTrash />
+                                            <HiOutlineTrash size={20} />
                                         </Button>
                                     </TableCell>
                                 </TableRow>

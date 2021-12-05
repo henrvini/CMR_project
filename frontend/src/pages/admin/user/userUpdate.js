@@ -16,7 +16,7 @@ import Nav from "../../../components/template/nav/Nav";
 import Footer from "../../../components/template/footer/Footer";
 
 const headerProps = {
-    icon: <FiUsers />,
+    icon: <FiUsers size={20} />,
     title: "Usuários",
     subtitle: "Atualização de usuários do sistema",
 };
@@ -76,7 +76,7 @@ export default function UserUpdate() {
                         color="primary"
                         href="/admin/users"
                     >
-                        <IoArrowBackCircleOutline />
+                        <IoArrowBackCircleOutline size={20} />
                         Voltar
                     </Button>
                 </div>

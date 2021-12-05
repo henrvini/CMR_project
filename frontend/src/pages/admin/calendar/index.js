@@ -25,17 +25,8 @@ const headerProps = {
     subtitle: "Calendário para agendamento e conferência de datas importantes",
 };
 
-const handleDateClick = (dateClickInfo) => {
-    // console.log(dateClickInfo.dateStr);
-};
-
-const formatDate = (date) => {
-    const formated = moment().format();
-};
-
 export default function Calendar() {
     const [events, setEvents] = useState([]);
-    const [mounted, setMounted] = useState([]);
 
     useEffect(() => {
         async function loadEvents() {
@@ -74,7 +65,6 @@ export default function Calendar() {
                 <div>
                     <FullCalendar
                         plugins={[dayGridPlugin, interactionPlugin]}
-                        dateClick={handleDateClick}
                         events={events}
                     ></FullCalendar>
                 </div>
