@@ -17,26 +17,26 @@ import Nav from "../../../components/template/nav/Nav";
 import Footer from "../../../components/template/footer/Footer";
 
 const headerProps = {
-    icon: <BiCalendar />,
+    icon: <BiCalendar size={20} />,
     title: "Calendário",
     subtitle: "Cadastrar novos eventos e datas no sistema",
 };
 
 export default function CalendarRegister() {
-    const [event_name, setEvent_name] = useState("");
+    const [title, setTitle] = useState("");
     const [desc_event, setDesc_event] = useState("");
     const [date, setDate] = useState("");
     const [location, setLocation] = useState("");
 
     async function handleSubmit() {
         const data = {
-            event_name: event_name,
+            title: title,
             desc_event: desc_event,
             date: date,
             location: location,
         };
 
-        if (event_name !== "" && date !== "") {
+        if (title !== "" && date !== "") {
             const response = await api.post("/api/calendars", data);
 
             if (response.status === 200) {
@@ -79,13 +79,13 @@ export default function CalendarRegister() {
                     <Grid item xs={12} sm={6}>
                         <TextField
                             required
-                            id="event_name"
-                            name="event_name"
-                            label="Nome do evento"
+                            id="title"
+                            name="title"
+                            label="Título do evento"
                             fullWidth
                             variant="standard"
-                            value={event_name}
-                            onChange={(e) => setEvent_name(e.target.value)}
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
                         />
                     </Grid>
                     <Grid item xs={12} sm={6}>

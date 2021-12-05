@@ -32,7 +32,7 @@ export default function Routes() {
     return (
         <Switch>
             {/* CLIENT ROUTE */}
-            <Route exact path="/" component={Home} />
+            <PrivateRoute exact path="/" component={Home} />
 
             {/* ADMIN ROUTE */}
             <Route exact path="/admin/login" component={Login} />
@@ -52,39 +52,39 @@ export default function Routes() {
             />
 
             {/* COMPANY ROUTE */}
-            <Route exact path="/admin/companies" component={Company} />
-            <Route
+            <PrivateRoute exact path="/admin/companies" component={Company} />
+            <PrivateRoute
                 exact
                 path="/admin/companies/register"
                 component={CompanyRegister}
             />
-            <Route
+            <PrivateRoute
                 exact
                 path="/admin/companies/update/:idCompany"
                 component={CompanyUpdate}
             />
 
             {/* SELLER ROUTE */}
-            <Route exact path="/admin/sellers" component={Seller} />
-            <Route
+            <PrivateRoute exact path="/admin/sellers" component={Seller} />
+            <PrivateRoute
                 exact
                 path="/admin/Seller/register"
                 component={SellerRegister}
             />
-            <Route
+            <PrivateRoute
                 exact
                 path="/admin/Seller/update/:idSeller"
                 component={SellerUpdate}
             />
 
             {/* COURSE ROUTE */}
-            <Route exact path="/admin/courses" component={Course} />
-            <Route
+            <PrivateRoute exact path="/admin/courses" component={Course} />
+            <PrivateRoute
                 exact
                 path="/admin/courses/register"
                 component={CourseRegister}
             />
-            <Route
+            <PrivateRoute
                 exact
                 path="/admin/courses/update/:idCourse"
                 component={CourseUpdate}

@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import moment from "moment";
+
+import api from "../../../services/api";
 
 import "../../../components/template/index.css";
 
@@ -14,6 +17,7 @@ import { BiCalendarEdit } from "react-icons/bi";
 
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
+import interactionPlugin from "@fullcalendar/interaction";
 
 const headerProps = {
     icon: <BiCalendar size={20} />,
@@ -21,7 +25,26 @@ const headerProps = {
     subtitle: "Calendário para agendamento e conferência de datas importantes",
 };
 
+const handleDateClick = (dateClickInfo) => {
+    // console.log(dateClickInfo.dateStr);
+};
+
+const formatDate = (date) => {
+    const formated = moment().format();
+};
+
 export default function Calendar() {
+    const [events, setEvents] = useState([]);
+    const [mounted, setMounted] = useState([]);
+
+    useEffect(() => {
+        async function loadEvents() {
+            const response = await api.get("/api/calendars");
+            setEvents(response.data);
+        }
+        loadEvents();
+    }, []);
+
     return (
         <grid className="app">
             <Logo />
@@ -50,8 +73,9 @@ export default function Calendar() {
                 </div>
                 <div>
                     <FullCalendar
-                        plugins={[dayGridPlugin]}
-                        initialView="dayGridMonth"
+                        plugins={[dayGridPlugin, interactionPlugin]}
+                        dateClick={handleDateClick}
+                        events={events}
                     ></FullCalendar>
                 </div>
             </Main>

@@ -2,9 +2,9 @@ const mongoose = require("mongoose");
 
 const DataSchema = new mongoose.Schema(
     {
-        event_name: String,
+        title: String,
         desc_event: String,
-        date: Date,
+        date: String,
         location: String,
     },
     {

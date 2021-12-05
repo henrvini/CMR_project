@@ -22,7 +22,7 @@ const headerProps = {
 };
 
 export default function CalendarUpdate() {
-    const [event_name, setEvent_name] = useState("");
+    const [title, setTitle] = useState("");
     const [desc_event, setDesc_event] = useState("");
     const [date, setDate] = useState("");
     const [location, setLocation] = useState("");
@@ -35,7 +35,7 @@ export default function CalendarUpdate() {
                 `/api/calendars.details/${idCalendar}`
             );
 
-            setEvent_name(response.data.event_name); // ERRO AO PUXAR INFORMAÇÕES AO CARREGAR PÁGINA ESTA PUXANDO INFORMAÇÕES SEMPRE DO MESMO USUÁRIO
+            setTitle(response.data.title); // ERRO AO PUXAR INFORMAÇÕES AO CARREGAR PÁGINA ESTA PUXANDO INFORMAÇÕES SEMPRE DO MESMO USUÁRIO
             setDesc_event(response.data.desc_event);
             setDate(response.data.date);
             setLocation(response.data.location);
@@ -47,13 +47,13 @@ export default function CalendarUpdate() {
     async function handleSubmit() {
         const data = {
             _id: idCalendar,
-            event_name: event_name,
+            title: title,
             desc_event: desc_event,
             date: date,
             location: location,
         };
 
-        if (event_name !== "" && date !== "") {
+        if (title !== "" && date !== "") {
             const response = await api.put("/api/calendars", data);
 
             if (response.status === 200) {
@@ -86,13 +86,13 @@ export default function CalendarUpdate() {
                     <Grid item xs={12} sm={8}>
                         <TextField
                             required
-                            id="event_name"
-                            name="event_name"
-                            label="Nome"
+                            id="title"
+                            name="title"
+                            label="Título do evento"
                             fullWidth
                             variant="standard"
-                            value={event_name}
-                            onChange={(e) => setEvent_name(e.target.value)}
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
                         />
                     </Grid>
                     <Grid item xs={12} sm={8}>

@@ -7,12 +7,12 @@ module.exports = {
     },
 
     async create(req, res) {
-        const { event_name, desc_event, date, location } = req.body;
+        const { title, desc_event, date, location } = req.body;
 
         let data = {};
-        let calendar = await Calendar.findOne({ event_name });
+        let calendar = await Calendar.findOne({ title });
         if (!calendar) {
-            data = { event_name, desc_event, date, location };
+            data = { title, desc_event, date, location };
             calendar = await Calendar.create(data);
             return res.status(200).json(calendar);
         } else {
@@ -34,8 +34,8 @@ module.exports = {
     },
 
     async update(req, res) {
-        const { _id, event_name, desc_event, date, location } = req.body;
-        const data = { event_name, desc_event, date, location };
+        const { _id, title, desc_event, date, location } = req.body;
+        const data = { title, desc_event, date, location };
 
         const calendar = await Calendar.findOneAndUpdate({ _id }, data, {
             new: true,
