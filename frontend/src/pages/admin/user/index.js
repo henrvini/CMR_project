@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 
 import api from "../../../services/api";
 
@@ -9,9 +9,12 @@ import Main from "../../../components/template/main/Main";
 import Logo from "../../../components/template/logo/Logo";
 import Footer from "../../../components/template/footer/Footer";
 
+import Input from "@mui/material/Input";
 import { FiUsers } from "react-icons/fi";
 import Button from "@mui/material/Button";
+import { FiSearch } from "react-icons/fi";
 import Table from "@material-ui/core/Table";
+import Box from "@mui/material/Box";
 import Paper from "@material-ui/core/Paper";
 import { RiPencilLine } from "react-icons/ri";
 import { HiOutlineTrash } from "react-icons/hi";
@@ -32,6 +35,7 @@ const headerProps = {
 
 export default function UserDetails() {
     const [users, setUsers] = useState([]);
+    const [search, setSearch] = useState("");
 
     useEffect(() => {
         async function loadUsers() {
@@ -41,6 +45,12 @@ export default function UserDetails() {
         }
         loadUsers();
     }, []);
+
+    const lowerSearch = search.toLowerCase();
+
+    const usersFilter = users.filter((user) =>
+        user.name.toLowerCase().includes(lowerSearch)
+    );
 
     async function handleDelete(id) {
         confirmAlert({
@@ -85,6 +95,12 @@ export default function UserDetails() {
                         <AiOutlineUserAdd size={20} />
                         Cadastrar
                     </Button>
+                    <Input
+                        style={{ marginLeft: 20, width: 400 }}
+                        placeholder="Buscar por nome do usuário"
+                        onChange={(e) => setSearch(e.target.value)}
+                    ></Input>
+                    <FiSearch size={20} />
                 </div>
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -100,7 +116,7 @@ export default function UserDetails() {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {users.map((row) => (
+                            {usersFilter.map((row) => (
                                 <TableRow
                                     key={row._id}
                                     sx={{

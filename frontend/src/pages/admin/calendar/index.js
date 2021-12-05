@@ -22,7 +22,7 @@ import interactionPlugin from "@fullcalendar/interaction";
 const headerProps = {
     icon: <BiCalendar size={20} />,
     title: "Calendário",
-    subtitle: "Calendário para agendamento e conferência de datas importantes",
+    subtitle: "Calendário para agendamento de eventos e datas importantes",
 };
 
 export default function Calendar() {

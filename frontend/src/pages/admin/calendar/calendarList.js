@@ -10,9 +10,11 @@ import Logo from "../../../components/template/logo/Logo";
 import Footer from "../../../components/template/footer/Footer";
 
 import Button from "@mui/material/Button";
+import { FiSearch } from "react-icons/fi";
 import { BiCalendar } from "react-icons/bi";
 import Table from "@material-ui/core/Table";
 import Paper from "@material-ui/core/Paper";
+import Input from "@material-ui/core/Input";
 import { RiPencilLine } from "react-icons/ri";
 import { HiOutlineTrash } from "react-icons/hi";
 import { BiCalendarPlus } from "react-icons/bi";
@@ -27,21 +29,28 @@ import TableContainer from "@material-ui/core/TableContainer";
 
 const headerProps = {
     icon: <BiCalendar size={20} />,
-    title: "Usuários",
-    subtitle: "Detalhes e informações de usuários cadastrados no sistema",
+    title: "Calendário",
+    subtitle: "Detalhes e informações de datas e eventos cadastrados no sistema",
 };
 
 export default function CalendarList() {
     const [calendars, setCalendars] = useState([]);
+    const [search, setSearch] = useState("");
 
     useEffect(() => {
         async function loadCalendars() {
             const response = await api.get("/api/calendars");
-            console.log(response.data)
+            console.log(response.data);
             setCalendars(response.data);
         }
         loadCalendars();
     }, []);
+
+    const lowerSearch = search.toLowerCase();
+
+    const calendarsFilter = calendars.filter((calendar) =>
+        calendar.title.toLowerCase().includes(lowerSearch)
+    );
 
     async function handleDelete(id) {
         confirmAlert({
@@ -96,6 +105,12 @@ export default function CalendarList() {
                         <BiCalendarPlus size={20} />
                         Adicionar evento
                     </Button>
+                    <Input
+                        style={{ marginLeft: 20, width: 400 }}
+                        placeholder="Buscar por título do evento"
+                        onChange={(e) => setSearch(e.target.value)}
+                    ></Input>
+                    <FiSearch size={20} />
                 </div>
                 <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -109,7 +124,7 @@ export default function CalendarList() {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {calendars.map((row) => (
+                            {calendarsFilter.map((row) => (
                                 <TableRow
                                     key={row._id}
                                     sx={{
