@@ -21,7 +21,7 @@ module.exports = {
     },
 
     async details(req, res) {
-        const { _id } = req.query;
+        const _id = req.query;
         const calendar = await Calendar.findOne(_id);
         res.json(calendar);
     },

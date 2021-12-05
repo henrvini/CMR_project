@@ -34,9 +34,9 @@ export default function CompanyUpdate() {
 
     useEffect(() => {
         async function getUser() {
-            let response = await api.get(`/api/companies.details/${idCompany}`);
+            const response = await api.get(`/api/companies.details/${idCompany}`);
 
-            setCompany_name(response.data.company_name); // ERRO AO PUXAR INFORMAÇÕES AO CARREGAR PÁGINA ESTA PUXANDO INFORMAÇÕES SEMPRE DO MESMO USUÁRIO
+            setCompany_name(response.data.company_name);
             setTrade(response.data.trade);
             setCgccpf(response.data.cgccpf);
             setEmail(response.data.email);

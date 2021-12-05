@@ -40,7 +40,6 @@ export default function CalendarList() {
     useEffect(() => {
         async function loadCalendars() {
             const response = await api.get("/api/calendars");
-            console.log(response.data);
             setCalendars(response.data);
         }
         loadCalendars();

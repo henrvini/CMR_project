@@ -18,7 +18,7 @@ import Footer from "../../../components/template/footer/Footer";
 const headerProps = {
     icon: <BiCalendar size={20} />,
     title: "Calendário",
-    subtitle: "Detalhes e informações de eventos cadastrados no sistema",
+    subtitle: "Atualização de eventos e datas cadastradas no sistema",
 };
 
 export default function CalendarUpdate() {
@@ -31,11 +31,11 @@ export default function CalendarUpdate() {
 
     useEffect(() => {
         async function getCalendar() {
-            let response = await api.get(
+            const response = await api.get(
                 `/api/calendars.details/${idCalendar}`
             );
 
-            setTitle(response.data.title); // ERRO AO PUXAR INFORMAÇÕES AO CARREGAR PÁGINA ESTA PUXANDO INFORMAÇÕES SEMPRE DO MESMO USUÁRIO
+            setTitle(response.data.title);
             setDesc_event(response.data.desc_event);
             setDate(response.data.date);
             setLocation(response.data.location);
@@ -83,7 +83,7 @@ export default function CalendarUpdate() {
                     </Button>
                 </div>
                 <Grid container spacing={3}>
-                    <Grid item xs={12} sm={8}>
+                    <Grid item xs={12} sm={6}>
                         <TextField
                             required
                             id="title"
@@ -95,7 +95,7 @@ export default function CalendarUpdate() {
                             onChange={(e) => setTitle(e.target.value)}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={8}>
+                    <Grid item xs={12} sm={6}>
                         <TextField
                             required
                             id="desc_event"
@@ -107,7 +107,7 @@ export default function CalendarUpdate() {
                             onChange={(e) => setDesc_event(e.target.value)}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={4}>
+                    <Grid item xs={12} sm={6}>
                         <TextField
                             required
                             id="date"
@@ -119,7 +119,7 @@ export default function CalendarUpdate() {
                             onChange={(e) => setDate(e.target.value)}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={2}>
+                    <Grid item xs={12} sm={6}>
                         <TextField
                             required
                             id="location"

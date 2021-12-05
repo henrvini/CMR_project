@@ -25,7 +25,7 @@ module.exports = {
     },
 
     async details(req, res) {
-        const { _id } = req.query;
+        const _id = req.params;
         const company = await Company.findOne(_id);
         res.json(company);
     },

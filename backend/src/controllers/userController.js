@@ -23,7 +23,7 @@ module.exports = {
     },
 
     async details(req, res) {
-        const { _id } = req.query;
+        const _id = req.params;
         const user = await User.findOne(_id);
         res.json(user);
     },

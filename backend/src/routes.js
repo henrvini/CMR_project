@@ -37,7 +37,7 @@ routes.post("/api/calendars", Calendar.create);
 routes.put("/api/calendars", Calendar.update);
 
 routes.get("/api/calendars", Calendar.index);
-routes.get("/api/calendar.details/:_id", Calendar.details);
+routes.get("/api/calendars.details/:_id", Calendar.details);
 
 routes.delete("/api/calendars/:_id", Calendar.delete);
 

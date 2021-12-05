@@ -31,9 +31,9 @@ export default function UserUpdate() {
 
     useEffect(() => {
         async function getUser() {
-            let response = await api.get(`/api/users.details/${idUser}`);
+            const response = await api.get(`/api/users.details/${idUser}`);
 
-            setName(response.data.name); // ERRO AO PUXAR INFORMAÇÕES AO CARREGAR PÁGINA ESTA PUXANDO INFORMAÇÕES SEMPRE DO MESMO USUÁRIO
+            setName(response.data.name);
             setEmail(response.data.email);
             setPhone(response.data.phone);
             setPassword(response.data.password);
