@@ -66,12 +66,12 @@ export default function Routes() {
             <PrivateRoute exact path="/admin/sellers" component={Seller} />
             <PrivateRoute
                 exact
-                path="/admin/Seller/register"
+                path="/admin/sellers/register"
                 component={SellerRegister}
             />
             <PrivateRoute
                 exact
-                path="/admin/Seller/update/:idSeller"
+                path="/admin/sellers/update/:idSeller"
                 component={SellerUpdate}
             />
 
