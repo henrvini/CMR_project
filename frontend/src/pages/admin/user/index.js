@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 
 import api from "../../../services/api";
 
@@ -14,7 +14,6 @@ import { FiUsers } from "react-icons/fi";
 import Button from "@mui/material/Button";
 import { FiSearch } from "react-icons/fi";
 import Table from "@material-ui/core/Table";
-import Box from "@mui/material/Box";
 import Paper from "@material-ui/core/Paper";
 import { RiPencilLine } from "react-icons/ri";
 import { HiOutlineTrash } from "react-icons/hi";
